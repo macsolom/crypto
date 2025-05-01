@@ -34,6 +34,19 @@ Moon Sniper is currently in **active development**. We're building out key featu
 
 > ⚠️ This project is not yet ready for public deployment.
 
+---
+
+## 🧠 Disclaimer
+
+Moon Sniper is an experimental project. It does not provide financial advice, and nothing in this repository should be interpreted as investment guidance. Always do your own research (DYOR) before trading crypto assets.
+
+---
+
+## 🛡 License
+
+This project is not open source. All rights reserved.
+
+
 When available:
 
 ```bash
