@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Degenerate Crypto Boyz - Advanced AI Predictions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        .blink {
+            animation: blink 1s step-start infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #0ea5e9 50%, #1e3a8a 100%);
+        }
+        .coin-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .positive {
+            color: #10b981;
+        }
+        .negative {
+            color: #ef4444;
+        }
+        .signal-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 4px;
+        }
+        .signal-strong {
+            background-color: #10b981;
+        }
+        .signal-medium {
+            background-color: #f59e0b;
+        }
+        .signal-weak {
+            background-color: #ef4444;
+        }
+        .progress-bar {
+            height: 6px;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #10b981);
+        }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 300px;
+            background-color: #1f2937;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -150px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        .glow {
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.7);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <div class="gradient-bg py-6 px-4 shadow-xl">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <i class="fab fa-ethereum text-3xl text-purple-400 mr-3 pulse"></i>
+                    <h1 class="text-3xl font-bold">
+                        <span class="text-yellow-400">Degenerate</span> 
+                        <span>Crypto Boyz</span>
+                        <span class="ml-2 text-xs bg-black bg-opacity-30 px-2 py-1 rounded-full">v2.0</span>
+                    </h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="bg-black bg-opacity-30 px-4 py-2 rounded-full glow">
+                        <i class="fas fa-brain text-purple-400 mr-2"></i>
+                        <span class="font-mono">Advanced AI Predictions</span>
+                    </div>
+                    <div class="hidden md:block bg-black bg-opacity-30 px-4 py-2 rounded-full">
+                        <i class="fas fa-rocket text-yellow-400 mr-2"></i>
+                        <span>10x or Bust</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 mb-8 border border-gray-700">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                <div>
+                    <h2 class="text-2xl font-bold mb-2">🚀 Today's AI-Powered Picks</h2>
+                    <p class="text-gray-400">Our advanced AI analyzes 137 indicators across exchanges to find coins most likely to pump 10%+ today</p>
+                </div>
+                <div class="mt-4 md:mt-0 flex items-center">
+                    <span class="text-sm text-gray-400 mr-3">Last updated:</span>
+                    <div class="bg-gray-700 px-3 py-1 rounded-full text-sm font-mono" id="updateTime">
+                        Loading...
+                    </div>
+                    <button id="refreshBtn" class="ml-3 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-8" id="topPicks">
+                <!-- Top 5 coins will be inserted here -->
+                <div class="text-center py-10">
+                    <div class="animate-pulse flex justify-center">
+                        <div class="h-8 w-8 bg-gray-700 rounded-full"></div>
+                    </div>
+                    <div class="mt-4 h-4 bg-gray-700 rounded w-3/4 mx-auto"></div>
+                    <div class="mt-2 h-4 bg-gray-700 rounded w-1/2 mx-auto"></div>
+                </div>
+                <div class="text-center py-10">
+                    <div class="animate-pulse flex justify-center">
+                        <div class="h-8 w-8 bg-gray-700 rounded-full"></div>
+                    </div>
+                    <div class="mt-4 h-4 bg-gray-700 rounded w-3/4 mx-auto"></div>
+                    <div class="mt-2 h-4 bg-gray-700 rounded w-1/2 mx-auto"></div>
+                </div>
+                <div class="text-center py-10">
+                    <div class="animate-pulse flex justify-center">
+                        <div class="h-8 w-8 bg-gray-700 rounded-full"></div>
+                    </div>
+                    <div class="mt-4 h-4 bg-gray-700 rounded w-3/4 mx-auto"></div>
+                    <div class="mt-2 h-4 bg-gray-700 rounded w-1/2 mx-auto"></div>
+                </div>
+                <div class="text-center py-10">
+                    <div class="animate-pulse flex justify-center">
+                        <div class="h-8 w-8 bg-gray-700 rounded-full"></div>
+                    </div>
+                    <div class="mt-4 h-4 bg-gray-700 rounded w-3/4 mx-auto"></div>
+                    <div class="mt-2 h-4 bg-gray-700 rounded w-1/2 mx-auto"></div>
+                </div>
+                <div class="text-center py-10">
+                    <div class="animate-pulse flex justify-center">
+                        <div class="h-8 w-8 bg-gray-700 rounded-full"></div>
+                    </div>
+                    <div class="mt-4 h-4 bg-gray-700 rounded w-3/4 mx-auto"></div>
+                    <div class="mt-2 h-4 bg-gray-700 rounded w-1/2 mx-auto"></div>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 rounded-lg p-4">
+                <div class="flex items-center mb-3">
+                    <i class="fas fa-robot text-purple-400 mr-2"></i>
+                    <h3 class="font-bold">Advanced AI Prediction Model</h3>
+                </div>
+                <p class="text-gray-400 text-sm mb-3">
+                    Our degenerate AI now analyzes 137 indicators across 6 categories to identify high-probability pumps:
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                    <div>
+                        <h4 class="font-bold text-sm mb-1 flex items-center">
+                            <i class="fas fa-chart-line text-blue-400 mr-2"></i> Technical Indicators
+                        </h4>
+                        <div class="flex flex-wrap gap-1">
+                            <div class="bg-gray-700 px-2 py-1 rounded-full text-xs">Price Action</div>
+                            <div class="bg-gray-700 px-2 py-1 rounded-full text-xs">RSI Levels</div>
+                            <div class="bg-gray-700 px-2 py-1 rounded-full text-xs">MACD Cross</div>
+                            <div class="bg-gray-700 px-2 py-1 rounded-full text-xs">Bollinger Bands</div>
+                            <div class="bg-gray-700 px-2 py-1 rounded-full text-xs">VWAP</div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm mb-1 flex items-center">
+                            <i class="fas fa-book text-green-400 mr-2"></i> Order Book
+                        </h4>
+                        <div class="flex flex-wrap gap-1">
+                            <div class="bg-gray-700 px-2 py-1 rounded-full text-xs">Buy Walls</div>
+                            <div class="bg-gray-700 px-2 py-1 rounded-full text-xs">Bid/Ask Spread</div>
+                            <div class="bg-gray-700 px-2 py-1 rounded-full text-xs">Spoofing</div>
+                            <div class="bg-gray-700 px-2 py-1 rounded-full text-xs">Liquidity</div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm mb-1 flex items-center">
+                            <i class="fas fa-link text-yellow-400 mr-2"></i> On-Chain
+                        </h4>
+                        <div class="flex flex-wrap gap-1">
+                            <div class="bg-gray-700 px-2 py-1 rounded-full text-xs">Whale Activity</div>
+                            <div class="bg-gray-700 px-2 py-1 rounded-full text-xs">DEX Flows</div>
+                            <div class="bg-gray-700 px-2 py-1 rounded-full text-xs">Gas Spikes</div>
+                            <div class="bg-gray-700 px-2 py-1 rounded-full text-xs">Staking</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button id="showMoreBtn" class="text-blue-400 text-sm hover:underline">
+                        <i class="fas fa-chevron-down mr-1"></i> Show All 137 Indicators
+                    </button>
+                </div>
+                
+                <div id="allIndicators" class="hidden mt-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div>
+                            <h4 class="font-bold text-sm mb-2 text-blue-400">📊 TECHNICAL INDICATORS</h4>
+                            <ul class="text-xs text-gray-400 space-y-1">
+                                <li>• Price Action / Momentum</li>
+                                <li>• Sudden price spike (1m/5m/15m candles)</li>
+                                <li>• Breakout of key resistance levels</li>
+                                <li>• RSI crossing above 70 or 30</li>
+                                <li>• MACD bullish cross</li>
+                                <li>• Moving average crossovers</li>
+                                <li>• Bollinger Band squeeze + expansion</li>
+                                <li>• High relative volume (7d/30d avg)</li>
+                                <li>• VWAP support</li>
+                                <li>• Imbalance fills/Fair Value Gaps</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm mb-2 text-green-400">📊 ORDER BOOK DYNAMICS</h4>
+                            <ul class="text-xs text-gray-400 space-y-1">
+                                <li>• Sudden large buy walls</li>
+                                <li>• Sell walls disappearing</li>
+                                <li>• Bid/ask spread tightening</li>
+                                <li>• Spoofing behavior detection</li>
+                                <li>• Liquidity zones analysis</li>
+                                <li>• High volatility + low liquidity zones</li>
+                                <li>• Exchange leverage availability</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm mb-2 text-purple-400">📊 ON-CHAIN DATA</h4>
+                            <ul class="text-xs text-gray-400 space-y-1">
+                                <li>• Spike in active addresses</li>
+                                <li>• Whale accumulation</li>
+                                <li>• Smart contract interactions</li>
+                                <li>• DEX inflow/outflow spikes</li>
+                                <li>• Exchange balance drops</li>
+                                <li>• Staking/unlocking events</li>
+                                <li>• Gas fee spikes</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm mb-2 text-yellow-400">📊 MARKET STRUCTURE</h4>
+                            <ul class="text-xs text-gray-400 space-y-1">
+                                <li>• Liquidation clusters</li>
+                                <li>• Open interest trends</li>
+                                <li>• Funding rate shifts</li>
+                                <li>• Cumulative Volume Delta</li>
+                                <li>• Perp DEX inflows</li>
+                                <li>• BTC correlation changes</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm mb-2 text-pink-400">📊 SENTIMENT & SOCIAL</h4>
+                            <ul class="text-xs text-gray-400 space-y-1">
+                                <li>• Twitter/X mentions</li>
+                                <li>• Telegram/Discord activity</li>
+                                <li>• Sentiment polarity</li>
+                                <li>• Influencer engagement</li>
+                                <li>• Reddit traction</li>
+                                <li>• LunarCrush/Santiment trends</li>
+                                <li>• Google Trends data</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm mb-2 text-red-400">📊 FUNDAMENTALS</h4>
+                            <ul class="text-xs text-gray-400 space-y-1">
+                                <li>• Exchange listings</li>
+                                <li>• Partnership announcements</li>
+                                <li>• Token burns</li>
+                                <li>• Low float/high FDV tokens</li>
+                                <li>• Protocol upgrades</li>
+                                <li>• Regulatory developments</li>
+                                <li>• Celebrity endorsements</li>
+                                <li>• Narrative cycles (AI, DePIN, RWA)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+            <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700">
+                <div class="flex items-center mb-4">
+                    <i class="fab fa-bitcoin text-yellow-400 mr-2"></i>
+                    <h3 class="font-bold">Coinbase Watchlist</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-700">
+                        <thead>
+                            <tr>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Coin</th>
+                                <th class="px-4 py-2 text-right text-xs font-medium text-gray-400 uppercase tracking-wider">Price</th>
+                                <th class="px-4 py-2 text-right text-xs font-medium text-gray-400 uppercase tracking-wider">24h</th>
+                                <th class="px-4 py-2 text-right text-xs font-medium text-gray-400 uppercase tracking-wider">AI Score</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-700" id="coinbaseCoins">
+                            <!-- Coinbase coins will be inserted here -->
+                            <tr><td colspan="4" class="text-center py-4 text-gray-500">Loading data...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-coins text-blue-400 mr-2"></i>
+                    <h3 class="font-bold">Crypto.com Watchlist</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-700">
+                        <thead>
+                            <tr>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Coin</th>
+                                <th class="px-4 py-2 text-right text-xs font-medium text-gray-400 uppercase tracking-wider">Price</th>
+                                <th class="px-4 py-2 text-right text-xs font-medium text-gray-400 uppercase tracking-wider">24h</th>
+                                <th class="px-4 py-2 text-right text-xs font-medium text-gray-400 uppercase tracking-wider">AI Score</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-700" id="cryptoComCoins">
+                            <!-- Crypto.com coins will be inserted here -->
+                            <tr><td colspan="4" class="text-center py-4 text-gray-500">Loading data...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700">
+                <div class="flex items-center mb-4">
+                    <i class="fab fa-btc text-orange-400 mr-2"></i>
+                    <h3 class="font-bold">Binance US Watchlist</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-700">
+                        <thead>
+                            <tr>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Coin</th>
+                                <th class="px-4 py-2 text-right text-xs font-medium text-gray-400 uppercase tracking-wider">Price</th>
+                                <th class="px-4 py-2 text-right text-xs font-medium text-gray-400 uppercase tracking-wider">24h</th>
+                                <th class="px-4 py-2 text-right text-xs font-medium text-gray-400 uppercase tracking-wider">AI Score</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-700" id="binanceUsCoins">
+                            <!-- Binance US coins will be inserted here -->
+                            <tr><td colspan="4" class="text-center py-4 text-gray-500">Loading data...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-chart-line text-green-400 mr-2"></i>
+                    <h3 class="font-bold">Recent Pumps</h3>
+                </div>
+                <div class="space-y-4" id="recentPumps">
+                    <!-- Recent pumps will be inserted here -->
+                    <div class="text-center py-8 text-gray-500">Loading pump history...</div>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-fire text-red-400 mr-2"></i>
+                    <h3 class="font-bold">Strongest Signals</h3>
+                </div>
+                <div class="space-y-4" id="strongSignals">
+                    <!-- Strong signals will be inserted here -->
+                    <div class="text-center py-8 text-gray-500">Loading signal data...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="gradient-bg py-6 px-4 mt-8">
+        <div class="container mx-auto text-center">
+            <p class="text-sm text-gray-300">
+                <span class="blink font-bold">⚠️ WARNING:</span> This is entertainment only. Crypto trading is highly risky. 
+                Our AI predictions are for degenerate entertainment purposes and should not be considered financial advice. 
+                Always do your own research before making any investment decisions.
+            </p>
+            <p class="text-xs text-gray-400 mt-2">
+                © 2023 Degenerate Crypto Boyz - Not affiliated with any exchanges
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced mock data with more indicators
+        const mockTopPicks = [
+            { 
+                symbol: "DOGE", 
+                name: "Dogecoin", 
+                price: "$0.082", 
+                change24h: "+8.2%", 
+                aiScore: "92%", 
+                changeClass: "positive",
+                logo: "https://cryptologos.cc/logos/dogecoin-doge-logo.png",
+                signals: [
+                    { name: "Price Action", strength: "strong" },
+                    { name: "Volume Spike", strength: "strong" },
+                    { name: "RSI", strength: "medium" },
+                    { name: "Social Buzz", strength: "strong" },
+                    { name: "Whale Activity", strength: "medium" }
+                ],
+                indicators: "Breakout from bull flag pattern on 4H chart. Volume 3x 30-day average. RSI bouncing from 50. Large buy walls appearing on Binance order book."
+            },
+            { 
+                symbol: "SHIB", 
+                name: "Shiba Inu", 
+                price: "$0.000011", 
+                change24h: "+5.7%", 
+                aiScore: "88%", 
+                changeClass: "positive",
+                logo: "https://cryptologos.cc/logos/shiba-inu-shib-logo.png",
+                signals: [
+                    { name: "MACD Cross", strength: "strong" },
+                    { name: "Twitter Buzz", strength: "medium" },
+                    { name: "Liquidity", strength: "weak" },
+                    { name: "On-chain", strength: "medium" }
+                ],
+                indicators: "MACD bullish crossover on daily. Whale accumulation detected (15 new wallets holding 1T+ SHIB). Funding rates turning positive."
+            },
+            { 
+                symbol: "PEPE", 
+                name: "Pepe", 
+                price: "$0.0000012", 
+                change24h: "+15.3%", 
+                aiScore: "95%", 
+                changeClass: "positive",
+                logo: "https://cryptologos.cc/logos/pepe-pepe-logo.png",
+                signals: [
+                    { name: "Sentiment", strength: "strong" },
+                    { name: "Volume", strength: "strong" },
+                    { name: "Liquidation", strength: "medium" },
+                    { name: "Technical", strength: "strong" }
+                ],
+                indicators: "Massive volume spike (10x average). Liquidation clusters above current price. Trending #1 on Crypto Twitter. Breaking key resistance at $0.00000115."
+            },
+            { 
+                symbol: "LTC", 
+                name: "Litecoin", 
+                price: "$85.32", 
+                change24h: "+3.1%", 
+                aiScore: "79%", 
+                changeClass: "positive",
+                logo: "https://cryptologos.cc/logos/litecoin-ltc-logo.png",
+                signals: [
+                    { name: "On-chain", strength: "medium" },
+                    { name: "Technical", strength: "medium" },
+                    { name: "Volume", strength: "weak" }
+                ],
+                indicators: "50EMA crossing 200EMA on daily. Exchange reserves dropping. Low float conditions with upcoming halving narrative."
+            },
+            { 
+                symbol: "SOL", 
+                name: "Solana", 
+                price: "$32.45", 
+                change24h: "+6.8%", 
+                aiScore: "85%", 
+                changeClass: "positive",
+                logo: "https://cryptologos.cc/logos/solana-sol-logo.png",
+                signals: [
+                    { name: "Technical", strength: "strong" },
+                    { name: "On-chain", strength: "strong" },
+                    { name: "Funding", strength: "medium" }
+                ],
+                indicators: "Breaking out from 3-month accumulation range. Positive CVD. Active addresses up 40% WoW. Large options buying in derivatives markets."
+            }
+        ];
+
+        const mockCoinbaseCoins = [
+            { symbol: "BTC", name: "Bitcoin", price: "$42,356", change24h: "+2.3%", aiScore: "65%", changeClass: "positive", signals: ["RSI", "Volume"] },
+            { symbol: "ETH", name: "Ethereum", price: "$2,345", change24h: "+1.8%", aiScore: "72%", changeClass: "positive", signals: ["MACD", "On-chain"] },
+            { symbol: "ADA", name: "Cardano", price: "$0.42", change24h: "-0.5%", aiScore: "58%", changeClass: "negative", signals: ["Funding"] },
+            { symbol: "MATIC", name: "Polygon", price: "$0.85", change24h: "+3.2%", aiScore: "81%", changeClass: "positive", signals: ["Volume", "Social"] },
+            { symbol: "AVAX", name: "Avalanche", price: "$24.67", change24h: "+4.1%", aiScore: "76%", changeClass: "positive", signals: ["Technical", "Liquidity"] }
+        ];
+
+        const mockCryptoComCoins = [
+            { symbol: "CRO", name: "Cronos", price: "$0.12", change24h: "+5.2%", aiScore: "83%", changeClass: "positive", signals: ["Volume", "Technical"] },
+            { symbol: "VVS", name: "VVS Finance", price: "$0.0000042", change24h: "-2.1%", aiScore: "42%", changeClass: "negative", signals: [] },
+            { symbol: "TON", name: "Toncoin", price: "$2.34", change24h: "+7.5%", aiScore: "89%", changeClass: "positive", signals: ["Social", "On-chain"] },
+            { symbol: "NEAR", name: "Near Protocol", price: "$3.21", change24h: "+1.3%", aiScore: "68%", changeClass: "positive", signals: ["Technical"] },
+            { symbol: "ATOM", name: "Cosmos", price: "$9.87", change24h: "-0.8%", aiScore: "53%", changeClass: "negative", signals: ["Funding"] }
+        ];
+
+        const mockBinanceUsCoins = [
+            { symbol: "BNB", name: "Binance Coin", price: "$312.45", change24h: "+1.2%", aiScore: "71%", changeClass: "positive", signals: ["Volume", "Technical"] },
+            { symbol: "XRP", name: "Ripple", price: "$0.62", change24h: "+0.8%", aiScore: "63%", changeClass: "positive", signals: ["Social"] },
+            { symbol: "DOGE", name: "Dogecoin", price: "$0.082", change24h: "+8.2%", aiScore: "92%", changeClass: "positive", signals: ["Volume", "Social", "Technical"] },
+            { symbol: "SOL", name: "Solana", price: "$32.45", change24h: "+6.8%", aiScore: "85%", changeClass: "positive", signals: ["Technical", "On-chain"] },
+            { symbol: "ADA", name: "Cardano", price: "$0.42", change24h: "-0.5%", aiScore: "58%", changeClass: "negative", signals: [] }
+        ];
+
+        const mockRecentPumps = [
+            { symbol: "PEPE", date: "Today", change: "+15.3%", time: "2 hours ago", indicators: "Volume spike + social buzz" },
+            { symbol: "DOGE", date: "Yesterday", change: "+22.1%", time: "3:45 PM", indicators: "Elon tweet + technical breakout" },
+            { symbol: "SHIB", date: "2 days ago", change: "+18.7%", time: "11:20 AM", indicators: "Whale accumulation + low float" },
+            { symbol: "LTC", date: "3 days ago", change: "+12.4%", time: "9:15 AM", indicators: "Halving narrative + technicals" }
+        ];
+
+        const mockStrongSignals = [
+            { symbol: "DOGE", signal: "Social Buzz", strength: "98%", indicators: "1.2M tweets in last 24h (+300%)" },
+            { symbol: "SOL", signal: "On-chain", strength: "92%", indicators: "Whale accumulation: $14M bought last hour" },
+            { symbol: "PEPE", signal: "Volume", strength: "95%", indicators: "Volume 10x 30-day average" },
+            { symbol: "MATIC", signal: "Technical", strength: "87%", indicators: "Bull flag breakout on 4H chart" }
+        ];
+
+        function updateTopPicks() {
+            const topPicksContainer = document.getElementById('topPicks');
+            topPicksContainer.innerHTML = '';
+            
+            mockTopPicks.forEach(coin => {
+                const coinCard = document.createElement('div');
+                coinCard.className = 'coin-card bg-gray-800 rounded-lg p-4 transition-all duration-300 cursor-pointer hover:shadow-lg';
+                coinCard.innerHTML = `
+                    <div class="flex justify-center mb-3">
+                        <img src="${coin.logo}" alt="${coin.symbol}" class="h-12 w-12 object-contain">
+                    </div>
+                    <h3 class="text-lg font-bold text-center">${coin.symbol}</h3>
+                    <p class="text-sm text-gray-400 text-center mb-1">${coin.name}</p>
+                    <p class="text-lg font-bold text-center mb-1">${coin.price}</p>
+                    <div class="flex justify-center items-center mb-2">
+                        <span class="text-sm ${coin.changeClass}">${coin.change24h}</span>
+                        <span class="ml-2 text-xs bg-gray-700 px-2 py-1 rounded-full">AI: ${coin.aiScore}</span>
+                    </div>
+                    <div class="flex justify-center flex-wrap gap-1 mb-2">
+                        ${coin.signals.map(signal => `
+                            <span class="text-xs bg-gray-700 px-2 py-1 rounded-full flex items-center">
+                                <span class="signal-indicator signal-${signal.strength}"></span>
+                                ${signal.name}
+                            </span>
+                        `).join('')}
+                    </div>
+                    <div class="tooltip text-center">
+                        <span class="text-xs text-blue-400 cursor-pointer">View Indicators</span>
+                        <span class="tooltip-text">${coin.indicators}</span>
+                    </div>
+                `;
+                topPicksContainer.appendChild(coinCard);
+            });
+        }
+
+        function updateCoinbaseCoins() {
+            const coinbaseContainer = document.getElementById('coinbaseCoins');
+            coinbaseContainer.innerHTML = '';
+            
+            mockCoinbaseCoins.forEach(coin => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-gray-700';
+                row.innerHTML = `
+                    <td class="px-4 py-3 whitespace-nowrap">
+                        <div class="flex items-center">
+                            <span class="font-medium">${coin.symbol}</span>
+                            <span class="ml-2 text-xs text-gray-400">${coin.name}</span>
+                        </div>
+                    </td>
+                    <td class="px-4 py-3 whitespace-nowrap text-right font-mono">${coin.price}</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-right ${coin.changeClass}">${coin.change24h}</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-right">
+                        <div class="flex items-center justify-end">
+                            <div class="w-16 mr-2">
+                                <div class="progress-bar bg-gray-700">
+                                    <div class="progress-fill" style="width: ${coin.aiScore}"></div>
+                                </div>
+                            </div>
+                            <span class="text-xs">${coin.aiScore}</span>
+                        </div>
+                    </td>
+                `;
+                coinbaseContainer.appendChild(row);
+            });
+        }
+
+        function updateCryptoComCoins() {
+            const cryptoComContainer = document.getElementById('cryptoComCoins');
+            cryptoComContainer.innerHTML = '';
+            
+            mockCryptoComCoins.forEach(coin => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-gray-700';
+                row.innerHTML = `
+                    <td class="px-4 py-3 whitespace-nowrap">
+                        <div class="flex items-center">
+                            <span class="font-medium">${coin.symbol}</span>
+                            <span class="ml-2 text-xs text-gray-400">${coin.name}</span>
+                        </div>
+                    </td>
+                    <td class="px-4 py-3 whitespace-nowrap text-right font-mono">${coin.price}</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-right ${coin.changeClass}">${coin.change24h}</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-right">
+                        <div class="flex items-center justify-end">
+                            <div class="w-16 mr-2">
+                                <div class="progress-bar bg-gray-700">
+                                    <div class="progress-fill" style="width: ${coin.aiScore}"></div>
+                                </div>
+                            </div>
+                            <span class="text-xs">${coin.aiScore}</span>
+                        </div>
+                    </td>
+                `;
+                cryptoComContainer.appendChild(row);
+            });
+        }
+
+        function updateBinanceUsCoins() {
+            const binanceUsContainer = document.getElementById('binanceUsCoins');
+            binanceUsContainer.innerHTML = '';
+            
+            mockBinanceUsCoins.forEach(coin => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-gray-700';
+                row.innerHTML = `
+                    <td class="px-4 py-3 whitespace-nowrap">
+                        <div class="flex items-center">
+                            <span class="font-medium">${coin.symbol}</span>
+                            <span class="ml-2 text-xs text-gray-400">${coin.name}</span>
+                        </div>
+                    </td>
+                    <td class="px-4 py-3 whitespace-nowrap text-right font-mono">${coin.price}</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-right ${coin.changeClass}">${coin.change24h}</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-right">
+                        <div class="flex items-center justify-end">
+                            <div class="w-16 mr-2">
+                                <div class="progress-bar bg-gray-700">
+                                    <div class="progress-fill" style="width: ${coin.aiScore}"></div>
+                                </div>
+                            </div>
+                            <span class="text-xs">${coin.aiScore}</span>
+                        </div>
+                    </td>
+                `;
+                binanceUsContainer.appendChild(row);
+            });
+        }
+
+        function updateRecentPumps() {
+            const recentPumpsContainer = document.getElementById('recentPumps');
+            recentPumpsContainer.innerHTML = '';
+            
+            mockRecentPumps.forEach(pump => {
+                const pumpItem = document.createElement('div');
+                pumpItem.className = 'bg-gray-700 rounded-lg p-3';
+                pumpItem.innerHTML = `
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <span class="font-bold mr-2">${pump.symbol}</span>
+                            <span class="text-xs text-gray-400">${pump.date}</span>
+                        </div>
+                        <span class="text-green-400 font-bold">${pump.change}</span>
+                    </div>
+                    <div class="text-xs text-gray-400 mt-1">${pump.time}</div>
+                    <div class="text-xs text-blue-400 mt-2">${pump.indicators}</div>
+                `;
+                recentPumpsContainer.appendChild(pumpItem);
+            });
+        }
+
+        function updateStrongSignals() {
+            const strongSignalsContainer = document.getElementById('strongSignals');
+            strongSignalsContainer.innerHTML = '';
+            
+            mockStrongSignals.forEach(signal => {
+                const signalItem = document.createElement('div');
+                signalItem.className = 'bg-gray-700 rounded-lg p-3';
+                signalItem.innerHTML = `
+                    <div class="flex justify-between items-center mb-1">
+                        <div class="flex items-center">
+                            <span class="font-bold mr-2">${signal.symbol}</span>
+                            <span class="text-xs text-gray-400">${signal.signal}</span>
+                        </div>
+                        <span class="text-green-400 font-bold text-sm">${signal.strength}</span>
+                    </div>
+                    <div class="text-xs text-gray-400">${signal.indicators}</div>
+                    <div class="progress-bar bg-gray-600 mt-2">
+                        <div class="progress-fill" style="width: ${signal.strength}"></div>
+                    </div>
+                `;
+                strongSignalsContainer.appendChild(signalItem);
+            });
+        }
+
+        function updateTimestamp() {
+            const now = new Date();
+            const options = { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: true 
+            };
+            document.getElementById('updateTime').textContent = now.toLocaleTimeString('en-US', options);
+        }
+
+        function refreshData() {
+            // Show loading state
+            document.getElementById('refreshBtn').innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+            
+            // Simulate API call delay
+            setTimeout(() => {
+                updateTopPicks();
+                updateCoinbaseCoins();
+                updateCryptoComCoins();
+                updateBinanceUsCoins();
+                updateRecentPumps();
+                updateStrongSignals();
+                updateTimestamp();
+                
+                // Reset refresh button
+                document.getElementById('refreshBtn').innerHTML = '<i class="fas fa-sync-alt"></i>';
+                
+                // Show success notification
+                const notification = document.createElement('div');
+                notification.className = 'fixed bottom-4 right-4 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg flex items-center';
+                notification.innerHTML = `
+                    <i class="fas fa-check-circle mr-2"></i> 
+                    <span>Analyzed 1,243 coins using 137 indicators</span>
+                `;
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+            }, 1500);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            refreshData();
+            
+            // Set up refresh button
+            document.getElementById('refreshBtn').addEventListener('click', refreshData);
+            
+            // Show more indicators
+            document.getElementById('showMoreBtn').addEventListener('click', function() {
+                const indicators = document.getElementById('allIndicators');
+                if (indicators.classList.contains('hidden')) {
+                    indicators.classList.remove('hidden');
+                    this.innerHTML = '<i class="fas fa-chevron-up mr-1"></i> Hide Indicators';
+                } else {
+                    indicators.classList.add('hidden');
+                    this.innerHTML = '<i class="fas fa-chevron-down mr-1"></i> Show All 137 Indicators';
+                }
+            });
+            
+            // Auto-refresh every 60 seconds
+            setInterval(refreshData, 60000);
+        });
+    </script>
+</body>
+</html>
